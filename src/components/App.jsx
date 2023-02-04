@@ -14,15 +14,7 @@ export const App = () => {
     { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ];
-  const [contacts, setContacts] = useState(() => {
-    const saveContacts = window.localStorage.getItem('contacts');
-    const parseContacts = JSON.parse(saveContacts);
-    if (parseContacts !== null) {
-      return parseContacts;
-    } else {
-      return startContacts;
-    }
-  });
+  const [contacts, setContacts] = useState(() =>JSON.parse(window.localStorage.getItem('contacts')??startContacts));
 
   const [filter, setFilter] = useState('');
 
@@ -32,7 +24,6 @@ export const App = () => {
 
   const getContactsFilter = () => {
     const normalizedFilter = filter.toLowerCase();
-    console.log(filter);
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
